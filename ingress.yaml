@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: myingressresource
+spec:
+ tls:
+ - hosts:
+   - credit-risk-demo-fdeea28e4a34dee3e8b3354a9cbfc9f5-0000.jp-tok.containers.appdomain.cloud
+   secretName: credit-risk-demo-fdeea28e4a34dee3e8b3354a9cbfc9f5-0000
+ rules:
+ - host: credit-risk-demo-fdeea28e4a34dee3e8b3354a9cbfc9f5-0000.jp-tok.containers.appdomain.cloud
+   http:
+     paths:
+     - path: /predict
+       pathType: ImplementationSpecific
+       backend:
+         service:
+           name: creditrisk-be-service
+           port:
+             number: 8080

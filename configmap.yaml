@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: creditrisk-properties
+data:
+  # property-like keys; each key maps to a simple value
+  MODEL_URL: "https://ds-public-bucket.s3.jp-tok.cloud-object-storage.appdomain.cloud/new_model.pkl"
+  BACKEND_URL: https://creditrisk-be-service/predict

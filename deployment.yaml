@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: creditrisk-be
+  labels:
+    app: creditrisk-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: creditrisk-be
+  template:
+    metadata:
+      labels:
+        app: creditrisk-be
+    spec:
+      containers:
+      - name: nginx
+        image: khairulhabib/creditrisk-be:0.1.2
+        ports:
+        - containerPort: 8080
+        env:
+          - name: MODEL_URL
+            valueFrom:
+              configMapKeyRef:
+                name: creditrisk-properties
+                key: MODEL_URL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: creditrisk-be-service
+spec:
+  selector:
+    app: creditrisk-be
+  ports:
+    - protocol: TCP
+      port: 8080
+
+          
